@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Screen Streamer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 16px;
+            font-family: system-ui, sans-serif;
+            background: #111;
+            color: #eee;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 22px;
+        }
+
+        code {
+            background: #222;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+
+        .preview {
+            margin-top: 16px;
+            border: 2px solid #444;
+            box-shadow: 0 0 16px rgba(0, 0, 0, 0.7);
+            max-width: 100%;
+            max-height: 60vh;
+        }
+
+        .note {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        ul {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Screen Streamer</h1>
+    <p>
+        The app is streaming your screen over HTTP as an MJPEG stream.
+    </p>
+    <ul>
+        <li>Local preview URL: <code>http://localhost:8080/</code></li>
+        <li>Stream endpoint: <code>http://localhost:8080/stream</code></li>
+        <li>
+            On other devices on the same Wi-Fi/LAN, use:
+            <br />
+            <span class="note">
+                <em>http://&lt;this-computer-IP&gt;:8080/</em><br />
+                Example: <code>http://192.168.1.50:8080/</code>
+            </span>
+        </li>
+    </ul>
+
+    <h3>Local Preview</h3>
+    <img class="preview" src="http://localhost:8080/stream" alt="Screen preview" />
+
+    <p class="note">
+        If the preview is blank, check:
+        <br />– That port <code>8080</code> is not blocked by a firewall
+        <br />– That the app has permission to capture the screen (macOS / Wayland)
+    </p>
+</body>
+
+</html>
