@@ -7,13 +7,13 @@ Scan a QR code on the app window to instantly open the stream on your phone.
 
 # 📸 Features
 
-- ✔️ Stream your entire desktop screen over HTTP
-- ✔️ Works on any device (Android, iPhone, Windows, Mac, Smart TV, Linux)
-- ✔️ No apps required on viewers — works in a web browser
-- ✔️ Built-in QR code for quick phone access
-- ✔️ Real-time MJPEG streaming
-- ✔️ Runs locally, secure, no internet required
-- ✔️ Packaged as a Windows executable (.exe)
-- ✔️ Works on any LAN/Wi-Fi network
-- ✔️ Supports multiple simultaneous viewers
-- ✔️ Extremely lightweight — no ffmpeg required
+✔️ Stream your entire desktop screen over HTTP <br>
+✔️ Works on any device (Android, iPhone, Windows, Mac, Smart TV, Linux) <br>
+✔️ No apps required on viewers — works in a web browser <br>
+✔️ Built-in QR code for quick phone access <br>
+✔️ Real-time MJPEG streaming <br>
+✔️ Runs locally, secure, no internet required <br>
+✔️ Packaged as a Windows executable (.exe) <br>
+✔️ Works on any LAN/Wi-Fi network <br>
+✔️ Supports multiple simultaneous viewers <br>
+✔️ Extremely lightweight — no ffmpeg required <br>
