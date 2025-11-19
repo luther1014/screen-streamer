@@ -1,5 +1,5 @@
 // main.js
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const os = require("os");
 const createScreenStreamServer = require("./server");
@@ -27,7 +27,8 @@ function createWindow(port) {
     height: 400,
     resizable: false,
     webPreferences: {
-      contextIsolation: true,
+      nodeIntegration: true,
+      contextIsolation: false,
     },
   });
 
@@ -56,6 +57,11 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow(port);
     }
+  });
+
+  // send IPs to renderer
+  ipcMain.handle("get-ip-list", () => {
+    return getLocalIPs(port);
   });
 });
 

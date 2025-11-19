@@ -15,7 +15,6 @@
 
         h1 {
             margin-top: 0;
-            font-size: 22px;
         }
 
         code {
@@ -24,7 +23,7 @@
             border-radius: 4px;
         }
 
-        .preview {
+        img.preview {
             margin-top: 16px;
             border: 2px solid #444;
             box-shadow: 0 0 16px rgba(0, 0, 0, 0.7);
@@ -32,44 +31,68 @@
             max-height: 60vh;
         }
 
-        .note {
-            font-size: 13px;
-            color: #aaa;
-            margin-top: 8px;
+        .ip-entry {
+            margin-bottom: 18px;
         }
 
-        ul {
-            font-size: 14px;
+        .qr {
+            margin-top: 6px;
+            border: 1px solid #333;
+            background: #000;
+            width: 140px;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .ip-text {
+            color: #0af;
+            font-size: 15px;
         }
     </style>
 </head>
 
 <body>
     <h1>Screen Streamer</h1>
-    <p>
-        The app is streaming your screen over HTTP as an MJPEG stream.
-    </p>
-    <ul>
-        <li>Local preview URL: <code>http://localhost:8080/</code></li>
-        <li>Stream endpoint: <code>http://localhost:8080/stream</code></li>
-        <li>
-            On other devices on the same Wi-Fi/LAN, use:
-            <br />
-            <span class="note">
-                <em>http://&lt;this-computer-IP&gt;:8080/</em><br />
-                Example: <code>http://192.168.1.50:8080/</code>
-            </span>
-        </li>
-    </ul>
 
-    <h3>Local Preview</h3>
-    <img class="preview" src="http://localhost:8080/stream" alt="Screen preview" />
+    <p>Local preview URL:</p>
+    <code>http://localhost:8080/</code>
 
-    <p class="note">
-        If the preview is blank, check:
-        <br />– That port <code>8080</code> is not blocked by a firewall
-        <br />– That the app has permission to capture the screen (macOS / Wayland)
-    </p>
+    <h3>Access from other devices on this network:</h3>
+    <div id="ip-list"></div>
+
+    <h3>Live Preview</h3>
+    <img class="preview" src="http://localhost:8080/stream" />
+
+    <script>
+        const { ipcRenderer } = require("electron");
+        const QRCode = require("qrcode");
+
+        async function loadIPs() {
+            const ipList = await ipcRenderer.invoke("get-ip-list");
+            const container = document.getElementById("ip-list");
+
+            ipList.forEach(async ip => {
+                const div = document.createElement("div");
+                div.className = "ip-entry";
+
+                const urlTag = document.createElement("div");
+                urlTag.textContent = ip;
+                urlTag.className = "ip-text";
+
+                const canvas = document.createElement("canvas");
+                canvas.className = "qr";
+
+                // generate QR code
+                await QRCode.toCanvas(canvas, ip, { width: 140, margin: 1 });
+
+                div.appendChild(urlTag);
+                div.appendChild(canvas);
+                container.appendChild(div);
+            });
+        }
+
+        loadIPs();
+    </script>
 </body>
 
 </html>
